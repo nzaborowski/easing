@@ -1,113 +1,113 @@
-		ArrayList balls = new ArrayList();
-		Smiley face;
-
-		void setup() {
-		  size(800, 800);
-		  imageMode(CENTER);
-		  face=new Smiley();
-		}
-
-		void draw() {
-		  background(0);
-		  colorMode(HSB, 360, 100, 100, 255);
-			for (int i=0; i<balls.size(); i++) {
-		    GBall ball = (GBall) balls.get(i);
-		    ball.create();
-		    if (ball.life==0) {
-  		    balls.remove(i);
-  		  }
- 		 }
- 		 face.follow();
-		}
-
-		void mouseDragged() {
-		  balls.add(new GBall());
-		}
-
-		class GBall {
-		  float x;
-		  float y;
-		  float holeX;
-		  float holeY;
-		  float moveX;
-		  float moveY;
-		  float easing;
-		  float diam;
-		  float radius;
-		  float speed;
-		  float xSpeed;
-		  float gravity;
-		  float life;
-		  float maxLife;
-		  float bright;
-		  float paint;
-		  boolean bounced=false;
-
-		  GBall() {
-		    x=mouseX;
-		    y=mouseY;
-		    holeX=width/2;
-		    holeY=height/2;
-		    easing=.01;
-		    diam=random(10, 50);
-		    radius=diam/2;
-		    //    speed=random(-5, -1);
-		    //    xSpeed=random(-3, 3);
-		    gravity=.1;
-		    paint=random(360);
-		    life=255;
-		  }
-		
-		  void create() {
-		    fill(color(paint, 100, 100, life));
-		    ellipse(x, y, diam, diam);
-		    moveX=holeX-x;
-		    moveY=holeY-y;
-		    x+=moveX*easing;
-		    y+=moveY*easing;
-		    //    y+=speed;
-		    //    x+=xSpeed;
-		    speed+=gravity;
-		    if ((y+radius>=height) && (speed>=0)) {
-		      speed*=-.8;
-		    }
-		    if (keyPressed) {
-		      if (key=='q') {
-		        xSpeed*=1.1;
-		        speed*=1.1;
-		      }
-		      if (key=='w') {
-		        xSpeed/=1.1;
-		        speed/=1.1;
-		        gravity=0;
-		        life++;
-		      }
-		    }
-		    if ((x-radius<=0)||(x+radius>=width)) {
-		      xSpeed=-xSpeed;
-		    }
-		    life--;
-		  }
-		}
-		
-		class Smiley {
-		  PImage smiley;
-		  float x;
-		  float y;
-		  float moveX;
-		  float moveY;
-		  float easing;
-		
-		  Smiley() {
-		    smiley=loadImage("smiley.png");
-		    easing=.1;
-		  }
-		
-		  void follow() {
-		    image(smiley, x, y);
-		    moveX=mouseX-x;
-		    moveY=mouseY-y;
-		    x+=moveX*easing;
-		    y+=moveY*easing;
-		  }
-		}
+    ArrayList balls = new ArrayList();
+    Smiley face;
+    
+    void setup() {
+      size(800, 800);
+      imageMode(CENTER);
+      face=new Smiley();
+    }
+    
+    void draw() {
+      background(0);
+      colorMode(HSB, 360, 100, 100, 255);
+    	for (int i=0; i<balls.size(); i++) {
+        GBall ball = (GBall) balls.get(i);
+        ball.create();
+        if (ball.life==0) {
+          balls.remove(i);
+        }
+      }
+      face.follow();
+    }
+    
+    void mouseDragged() {
+      balls.add(new GBall());
+    }
+    
+    class GBall {
+      float x;
+      float y;
+      float holeX;
+      float holeY;
+      float moveX;
+      float moveY;
+      float easing;
+      float diam;
+      float radius;
+      float speed;
+      float xSpeed;
+      float gravity;
+      float life;
+      float maxLife;
+      float bright;
+      float paint;
+      boolean bounced=false;
+    
+      GBall() {
+        x=mouseX;
+        y=mouseY;
+        holeX=width/2;
+        holeY=height/2;
+        easing=.01;
+        diam=random(10, 50);
+        radius=diam/2;
+        //    speed=random(-5, -1);
+        //    xSpeed=random(-3, 3);
+        gravity=.1;
+        paint=random(360);
+        life=255;
+      }
+    
+      void create() {
+        fill(color(paint, 100, 100, life));
+        ellipse(x, y, diam, diam);
+        moveX=holeX-x;
+        moveY=holeY-y;
+        x+=moveX*easing;
+        y+=moveY*easing;
+        //    y+=speed;
+        //    x+=xSpeed;
+        speed+=gravity;
+        if ((y+radius>=height) && (speed>=0)) {
+          speed*=-.8;
+        }
+        if (keyPressed) {
+          if (key=='q') {
+            xSpeed*=1.1;
+            speed*=1.1;
+          }
+          if (key=='w') {
+            xSpeed/=1.1;
+            speed/=1.1;
+            gravity=0;
+            life++;
+          }
+        }
+        if ((x-radius<=0)||(x+radius>=width)) {
+          xSpeed=-xSpeed;
+        }
+        life--;
+      }
+    }
+    
+    class Smiley {
+      PImage smiley;
+      float x;
+      float y;
+      float moveX;
+      float moveY;
+      float easing;
+    
+      Smiley() {
+        smiley=loadImage("smiley.png");
+        easing=.1;
+      }
+    
+      void follow() {
+        image(smiley, x, y);
+        moveX=mouseX-x;
+        moveY=mouseY-y;
+        x+=moveX*easing;
+        y+=moveY*easing;
+      }
+    }
